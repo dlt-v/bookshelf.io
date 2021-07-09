@@ -1,7 +1,7 @@
 <template>
-    <h1>Hello!</h1>
+    <h1>Find the book you're looking for!</h1>
     <input type="text" v-model="text" placeholder="Enter the book title">
-    <button @click="clicked()">Please click me!</button>
+    <button @click="clicked()"><i class="fas fa-search"></i></button>
     <div :key="book.id" v-for="book in books">
         <h3>{{book.volumeInfo.title}}</h3>
 
@@ -47,5 +47,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+    h1 {
+        color: $vue-color;
+        margin: 40px 0 20px;
+    }
+    input {
+        height: 30px;
+        width: 300px;
+        font-size: 25px;
+        border: none;
+        border-bottom: solid 1px $vue-color;
+        color: $vue-color;
+        &:active, &:focus {
+            transition: 0.1s;
+            border: none;
+            border-bottom: solid 3px $vue-color;
+            outline: none;
+        }
+    }
+    button {
+        color: white;
+        font-size: 25px;
+        margin-left: 30px;
+        background-color: $vue-color;
+        border: none;
+        padding: 10px;
+        i {
+            margin: auto;
+        }
+        &:hover, &:active {
+            cursor: pointer;
+        }
+        &:active {
+            transition: 0.1s;
+            background-color: white;
+            color: $vue-color;
+        }
+    }
 </style>
