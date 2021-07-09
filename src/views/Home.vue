@@ -1,10 +1,9 @@
 <template>
     <h1>Find the book you're looking for!</h1>
-    <input type="text" v-model="text" placeholder="Enter the book title">
+    <input type="text" v-model="text" v-on:keyup.enter="clicked()" placeholder="Enter the book title">
     <button @click="clicked()"><i class="fas fa-search"></i></button>
     <div :key="book.id" v-for="book in books">
         <h3>{{book.volumeInfo.title}}</h3>
-
     </div>
 </template>
 
@@ -64,23 +63,30 @@ export default {
             border-bottom: solid 3px $vue-color;
             outline: none;
         }
+        &::placeholder {
+            color: rgb(190, 190, 190);
+        }
     }
     button {
+        height: 50px;
+        width: 50px;
         color: white;
         font-size: 25px;
         margin-left: 30px;
         background-color: $vue-color;
         border: none;
-        padding: 10px;
         i {
             margin: auto;
         }
         &:hover, &:active {
+            transition: .1s;
             cursor: pointer;
+            background-color: white;
+            color: $vue-color;
+            border: 3px solid $vue-color;
         }
         &:active {
             transition: 0.1s;
-            background-color: white;
             color: $vue-color;
         }
     }

@@ -23,25 +23,30 @@ export default {
 
 <style lang="scss" scoped>
     .container__items {
+        -webkit-box-sizing: border-box !important;
+        -moz-box-sizing: border-box !important;
+        -ms-box-sizing: border-box !important;
+        box-sizing: border-box !important;
         border-radius: 5px;
+        width: 132px;
         height: 75%;
         background-color: white;
         color: $vue-color;
 
         font-size: 20px;
-        padding: 5px;
+        padding: 10px 15px;
         margin: 0 10px;
         text-align: center;
-        box-shadow: 0 0 5px rgb(78, 78, 78);
         &:hover {
+            transition: .2s;
             cursor: pointer;
-
+            border: 1px solid white;
+            background-color: $vue-color;
+            color: white;
         }
         &:active {
-             box-shadow: 0 0 2px rgb(37, 37, 37);
-            transition: box-shadow 0.1s;
+            background-color: $vue-dark;
         }
-
         p {
             
         }
