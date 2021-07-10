@@ -2,14 +2,15 @@
     <h1>Find the book you're looking for!</h1>
     <input type="text" v-model="text" v-on:keyup.enter="clicked()" placeholder="Enter the book title">
     <button @click="clicked()"><i class="fas fa-search"></i></button>
-    <div :key="book.id" v-for="book in books">
-        <h3>{{book.volumeInfo.title}}</h3>
+    <div class="books__container">
+        <Book :key="book.id" v-for="book in books" v-bind:book="book" />
     </div>
+
+    
 </template>
 
 <script>
-// import bookSearch from '../components/BookSearch';
-// import Books from '../components/Books';
+import Book from '../components/Book';
 
 export default {
     name: "Home",
@@ -19,7 +20,9 @@ export default {
             text: '',
         }
     },
-    components: {},
+    components: {
+        Book,
+    },
     methods: {
         async clicked() {
             try {
@@ -89,5 +92,12 @@ export default {
             transition: 0.1s;
             color: $vue-color;
         }
+    }
+
+    .books__container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: flex-start;
     }
 </style>
