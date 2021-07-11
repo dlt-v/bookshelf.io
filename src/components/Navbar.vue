@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
     .container {
-        width: 100vw;
+        width: 100%;
         height: 60px;
         background-color: $vue-color;
         display: flex;

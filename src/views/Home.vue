@@ -5,8 +5,6 @@
     <div class="books__container">
         <Book :key="book.id" v-for="book in books" v-bind:book="book" />
     </div>
-
-    
 </template>
 
 <script>
@@ -99,7 +97,8 @@ export default {
         flex-wrap: wrap;
         justify-content: center;
         align-items: flex-start;
-        width: 80vw;
-        margin: 0 auto;
+        width: 80%;
+        margin: 30px auto 0 auto;
+
     }
 </style>

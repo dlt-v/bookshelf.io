@@ -27,10 +27,9 @@ export default {
             return this.book.volumeInfo.imageLinks.thumbnail;
         },
         returnAuthors() {
+            if (!this.book.volumeInfo.authors) return "";
             if (this.book.volumeInfo.authors.length === 1) {
                 return this.book.volumeInfo.authors[0];
-            } else if (!this.book.volumeInfo.authors) {
-                return "";
             } else {
                 let authors = "";
                 let i = 0;
@@ -47,11 +46,12 @@ export default {
         },
         formatTitle() {
             if (!this.book.volumeInfo.title) return '';
-            if (this.book.volumeInfo.title.length < 25) {
+
+            if (this.book.volumeInfo.title.length < 58) {
                 return this.book.volumeInfo.title;
             } else {
                 let newTitle = '';
-                for (let i = 0; i < 25; i++) {
+                for (let i = 0; i < 45; i++) {
                     newTitle += this.book.volumeInfo.title[i];
                 }
                 newTitle += "...";
@@ -88,7 +88,8 @@ export default {
         padding: 10px;
 
         .title {
-            text-align: center;
+            overflow: hidden;
+            overflow: hidden;
         }
         .author {
         }
