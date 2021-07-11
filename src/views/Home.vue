@@ -36,7 +36,7 @@ export default {
         },
         async fetchBooks() {
             const resolved = await fetch(
-                `https://www.googleapis.com/books/v1/volumes?q=${this.text}&langRestrict=en`,
+                `https://www.googleapis.com/books/v1/volumes?q=${this.text}&langRestrict=en&maxResults=30`,
                 {
                     method: "GET"
                 });
@@ -97,7 +97,9 @@ export default {
     .books__container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: flex-start;
+        width: 80vw;
+        margin: 0 auto;
     }
 </style>
