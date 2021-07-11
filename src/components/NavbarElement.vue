@@ -47,9 +47,6 @@ export default {
         &:active {
             background-color: $vue-dark;
         }
-        p {
-            
-        }
         
     }
 </style>

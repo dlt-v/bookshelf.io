@@ -89,7 +89,6 @@ export default {
 
         .title {
             overflow: hidden;
-            overflow: hidden;
         }
         .author {
         }
