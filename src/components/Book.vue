@@ -21,24 +21,12 @@ export default {
         book: {}
     },
     methods: {
-        async fetchImage () {
-            try {
-                const result = await fetch(`${this.book.volumeInfo.imageLinks.thumbnail}&key=AIzaSyBZqEEx1aLhTvGbZ2G3uAChiH0Xq9TMnAI`, {
-                    method: "GET",
-                    mode: 'no-cors'
-                });
-                console.log(result);
-            } catch (error) {
-                console.log(error);
-            }
-        },
         getImage() {
             return this.book.volumeInfo.imageLinks.thumbnail;
         }
     },
     mounted: function () {
         console.log(this.book.volumeInfo.imageLinks.thumbnail);
-        // this.fetchImage();
     }
 
 }
