@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <img :src="getImage()" alt="" />
+        <img :src="getImage()" :alt="formatTitle()" />
         <div class="about">
             <h3 class="title">{{ formatTitle() }}</h3>
             <h6 class="author">{{ returnAuthors() }}</h6>
@@ -24,6 +24,7 @@ export default {
     },
     methods: {
         getImage() {
+            if(!this.book.volumeInfo.imageLinks.thumbnail) return '';
             return this.book.volumeInfo.imageLinks.thumbnail;
         },
         returnAuthors() {

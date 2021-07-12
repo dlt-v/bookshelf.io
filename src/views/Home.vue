@@ -5,10 +5,9 @@
     <div class="books__container">
         <Book :key="book.id" v-for="book in books" v-bind:book="book" />
     </div>
-    <!-- <div v-if="showNav" class="navigation"> -->
-    <div class="navigation">
-        <div class="nav__button nav__back"><i class="fas fa-arrow-left"></i></div>
-        <div class="nav__button nav__forward"><i class="fas fa-arrow-right"></i></div>
+    <div v-if="showNav" class="navigation">
+        <div v-if="currentPage" class="nav__button nav__button--back" @click="changePage(-1)"><i class="fas fa-arrow-left"></i></div>
+        <div class="nav__button nav__button--forward" @click="changePage(1)"><i class="fas fa-arrow-right"></i></div>
     </div>
 </template>
 
@@ -22,6 +21,7 @@ export default {
             books: [],
             text: '',
             showNav: false,
+            currentPage: 0,
         }
     },
     components: {
@@ -41,12 +41,17 @@ export default {
         },
         async fetchBooks() {
             const resolved = await fetch(
-                `https://www.googleapis.com/books/v1/volumes?q=${this.text}&langRestrict=en&maxResults=30`,
+                `https://www.googleapis.com/books/v1/volumes?q=${this.text}&langRestrict=en&maxResults=30&startIndex=${this.currentPage * 30}`,
                 {
                     method: "GET"
                 });
                 resolved.status === 200 ? console.log("success") : console.log("fail");
                 return resolved;
+        },
+        async changePage(diff) {
+            console.log(`Current page: ${this.currentPage} + (${diff})`);
+            this.currentPage += diff;
+            this.clicked();
         }
     }
 
@@ -110,22 +115,28 @@ export default {
     }
 
     .navigation {
-        width: 130px;
+        width: 150px;
         margin: 10px auto 30px auto;
         display: block;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
 
         .nav__button {
-            height: 50px;
+            height: 60px;
             font-size: 1.9em;;
             background-color: $vue-color;
             color: white;
             border-radius: 5px;
-            width: 50px;
+            width: 60px;
             text-align: center;
-            padding: 7px;
+            padding: 12px;
             transition: .1s;
+            &--back {
+                margin-right: 30px;
+            }
+            &--inactive {
+                display: none;
+            }
             &:hover {
                 cursor: pointer;
                 transform: scale(1.1, 1.1);
