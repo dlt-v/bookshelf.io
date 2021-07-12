@@ -3,10 +3,10 @@
         <img :src="getImage()" alt="" />
         <div class="about">
             <h3 class="title">{{ formatTitle() }}</h3>
-            <h6 class="author">{{ `by ${returnAuthors()}` }}</h6>
-            <p class="subtitle">
+            <h6 class="author">{{ returnAuthors() }}</h6>
+            <!-- <p class="subtitle">
                 {{ book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "" }}
-            </p>
+            </p> -->
         </div>
     </div>
 </template>
@@ -29,9 +29,9 @@ export default {
         returnAuthors() {
             if (!this.book.volumeInfo.authors) return "";
             if (this.book.volumeInfo.authors.length === 1) {
-                return this.book.volumeInfo.authors[0];
+                return `by ${this.book.volumeInfo.authors[0]}`;
             } else {
-                let authors = "";
+                let authors = "by ";
                 let i = 0;
                 for (let author of this.book.volumeInfo.authors) {
                     if(i > this.book.volumeInfo.authors.length) {

@@ -5,6 +5,11 @@
     <div class="books__container">
         <Book :key="book.id" v-for="book in books" v-bind:book="book" />
     </div>
+    <!-- <div v-if="showNav" class="navigation"> -->
+    <div class="navigation">
+        <div class="nav__button nav__back"><i class="fas fa-arrow-left"></i></div>
+        <div class="nav__button nav__forward"><i class="fas fa-arrow-right"></i></div>
+    </div>
 </template>
 
 <script>
@@ -16,6 +21,7 @@ export default {
         return {
             books: [],
             text: '',
+            showNav: false,
         }
     },
     components: {
@@ -31,6 +37,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+            this.showNav = true;
         },
         async fetchBooks() {
             const resolved = await fetch(
@@ -100,5 +107,32 @@ export default {
         width: 80%;
         margin: 30px auto 0 auto;
 
+    }
+
+    .navigation {
+        width: 130px;
+        margin: 10px auto 30px auto;
+        display: block;
+        display: flex;
+        justify-content: space-between;
+
+        .nav__button {
+            height: 50px;
+            font-size: 1.9em;;
+            background-color: $vue-color;
+            color: white;
+            border-radius: 5px;
+            width: 50px;
+            text-align: center;
+            padding: 7px;
+            transition: .1s;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1, 1.1);
+            }
+            &:active {
+                transform: scale(1.05, 1.05);
+            }
+        }
     }
 </style>
