@@ -24,7 +24,8 @@ export default {
     },
     methods: {
         getImage() {
-            if(!this.book.volumeInfo.imageLinks.thumbnail) return '';
+            
+            if(!this.book.volumeInfo.imageLinks) return '';
             return this.book.volumeInfo.imageLinks.thumbnail;
         },
         returnAuthors() {
