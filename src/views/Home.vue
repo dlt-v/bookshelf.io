@@ -1,13 +1,13 @@
 <template>
     <h1>Find the book you're looking for!</h1>
-    <input type="text" v-model="text" v-on:keyup.enter="clicked()" placeholder="Enter the book title">
-    <button @click="clicked()"><i class="fas fa-search"></i></button>
+    <input type="text" v-model="text" v-on:keyup.enter="clicked(true)" placeholder="Enter the book title">
+    <button @click="clicked(true)"><i class="fas fa-search"></i></button>
     <div class="books__container">
         <Book :key="book.id" v-for="book in books" v-bind:book="book" />
     </div>
     <div v-if="showNav" class="navigation">
         <div v-if="currentPage" class="nav__button nav__button--back" @click="changePage(-1)"><i class="fas fa-arrow-left"></i></div>
-        <div class="nav__button nav__button--forward" @click="changePage(1)"><i class="fas fa-arrow-right"></i></div>
+        <div v-if="notLastPage" class="nav__button nav__button--forward" @click="changePage(1)"><i class="fas fa-arrow-right"></i></div>
     </div>
 </template>
 
@@ -22,13 +22,14 @@ export default {
             text: '',
             showNav: false,
             currentPage: 0,
+            notLastPage: true,
         }
     },
     components: {
         Book,
     },
     methods: {
-        async clicked() {
+        async clicked(restart = false) {
             try {
                 const result = await this.fetchBooks();
                 const jsonResult = await result.json();
@@ -38,6 +39,13 @@ export default {
                 console.log(error);
             }
             this.showNav = true;
+            if (restart) this.currentPage = 0;
+            if (this.books.length < 30) {
+                this.lastPage = false;
+            } else {
+                this.lastPage = true;
+            }
+            window.scrollTo(0,0);
         },
         async fetchBooks() {
             const resolved = await fetch(
