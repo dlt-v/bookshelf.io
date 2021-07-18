@@ -20,9 +20,11 @@ export default {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        position: relative;
     }
     body {
         width: 100%;
+        height: 100%;
     }
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -30,5 +32,6 @@ export default {
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: $dark-default-blue;
+        display: block;
     }
 </style>

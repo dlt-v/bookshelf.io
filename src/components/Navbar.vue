@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+    <div class="container sticky">
+            <NavbarSearch > </NavbarSearch>
         <!-- Move style to dedicated style tag later! -->
         <router-link style="text-decoration: none;" to="/">
             <NavbarElement value="New books" />
@@ -11,12 +12,14 @@
 </template>
 
 <script>
-import NavbarElement from './NavbarElement'
+import NavbarElement from './NavbarElement';
+import NavbarSearch from './NavbarSearch.vue';
 
 export default {
     name: "Header",
     components: {
-        NavbarElement
+        NavbarElement,
+        NavbarSearch
     }
 }
 </script>
@@ -29,5 +32,13 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .sticky {
+        position: fixed;
+        margin-top: -40px;
+        z-index: 100;
+        box-shadow: 3px 0 1px #ccc;
+        -webkit-box-shadow: 3px 0 5px #ccc;
+        -moz-box-shadow: 3px 0 5px #ccc;
     }
 </style>
