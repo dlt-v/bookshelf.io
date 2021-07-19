@@ -22,7 +22,7 @@ export default {
             text: '',
             showNav: false,
             currentPage: 0,
-            notLastPage: true,
+            notLastPage: true
         }
     },
     components: {

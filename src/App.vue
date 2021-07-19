@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <Navbar showSticky="showSticky"/>
     <router-view />
 </template>
 
@@ -8,6 +8,11 @@ import Navbar from "./components/Navbar.vue";
 
 export default {
     name: "App",
+    data () {
+        return {
+            showSticky: false
+        }
+    },
     components: {
         Navbar
     },

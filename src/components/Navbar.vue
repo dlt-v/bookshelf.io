@@ -1,6 +1,6 @@
 <template>
-    <div class="container sticky">
-            <NavbarSearch > </NavbarSearch>
+    <div v-bind:class="{ showSticky: sticky}" class="container">
+            <NavbarSearch v-if="showSticky"> </NavbarSearch>
         <!-- Move style to dedicated style tag later! -->
         <router-link style="text-decoration: none;" to="/">
             <NavbarElement value="New books" />
@@ -20,6 +20,12 @@ export default {
     components: {
         NavbarElement,
         NavbarSearch
+    },
+    props: {
+        showSticky: {
+            type: Boolean,
+            default: false
+        }
     }
 }
 </script>
