@@ -1,6 +1,7 @@
-import { createRouter, createWebHistory  } from "vue-router";
-import Home from "../views/Home"
-import Library from "../views/Library"
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home";
+import Library from "../views/Library";
+import Details from "../views/Details";
 
 const routes = [
     {
@@ -12,6 +13,12 @@ const routes = [
         path: "/mylibrary",
         name: "Library",
         component: Library
+    },
+    {
+        path: "/book",
+        name: "Book",
+        component: Details,
+        props: route => ({ bookId: route.query.id })
     }
 ];
 

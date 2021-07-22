@@ -1,14 +1,16 @@
 <template>
-    <div class="container">
-        <img :src="getImage()" :alt="formatTitle()" />
-        <div class="about">
-            <h3 class="title">{{ formatTitle() }}</h3>
-            <h6 class="author">{{ returnAuthors() }}</h6>
-            <!-- <p class="subtitle">
+    <router-link style="text-decoration: none;" to="/book">
+        <div class="container">
+            <img :src="getImage()" :alt="formatTitle()" />
+            <div class="about">
+                <h3 class="title">{{ formatTitle() }}</h3>
+                <h6 class="author">{{ returnAuthors() }}</h6>
+                <!-- <p class="subtitle">
                 {{ book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "" }}
             </p> -->
+            </div>
         </div>
-    </div>
+    </router-link>
 </template>
 
 <script>
@@ -24,8 +26,7 @@ export default {
     },
     methods: {
         getImage() {
-            
-            if(!this.book.volumeInfo.imageLinks) return '';
+            if (!this.book.volumeInfo.imageLinks) return "";
             return this.book.volumeInfo.imageLinks.thumbnail;
         },
         returnAuthors() {
@@ -36,7 +37,7 @@ export default {
                 let authors = "by ";
                 let i = 0;
                 for (let author of this.book.volumeInfo.authors) {
-                    if(i > this.book.volumeInfo.authors.length) {
+                    if (i > this.book.volumeInfo.authors.length) {
                         authors += ` ${author},`;
                     } else {
                         authors += ` ${author}`;
@@ -47,12 +48,12 @@ export default {
             }
         },
         formatTitle() {
-            if (!this.book.volumeInfo.title) return '';
+            if (!this.book.volumeInfo.title) return "";
 
             if (this.book.volumeInfo.title.length < 58) {
                 return this.book.volumeInfo.title;
             } else {
-                let newTitle = '';
+                let newTitle = "";
                 for (let i = 0; i < 45; i++) {
                     newTitle += this.book.volumeInfo.title[i];
                 }
@@ -75,6 +76,7 @@ export default {
     justify-content: space-between;
     margin: 20px;
     transition: all 0.2s;
+    color: $vue-dark;
 
     img {
         height: 100%;
