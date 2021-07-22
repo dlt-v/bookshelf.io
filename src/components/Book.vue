@@ -1,5 +1,5 @@
 <template>
-    <router-link style="text-decoration: none;" to="/book">
+    <router-link style="text-decoration: none;" to="">
         <div class="container">
             <img :src="getImage()" :alt="formatTitle()" />
             <div class="about">
