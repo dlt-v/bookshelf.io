@@ -1,6 +1,5 @@
 <template>
-    <router-link style="text-decoration: none;" to="">
-        <div class="container">
+        <div v-on:click="seeBook" class="container">
             <img :src="getImage()" :alt="formatTitle()" />
             <div class="about">
                 <h3 class="title">{{ formatTitle() }}</h3>
@@ -10,10 +9,10 @@
             </p> -->
             </div>
         </div>
-    </router-link>
 </template>
 
 <script>
+import router from "../router/index";
 export default {
     name: "Book",
     data() {
@@ -25,6 +24,9 @@ export default {
         book: {}
     },
     methods: {
+        seeBook() {
+            router.push({ path: '/book', query: { id: this.book.id } });
+        },
         getImage() {
             if (!this.book.volumeInfo.imageLinks) return "";
             return this.book.volumeInfo.imageLinks.thumbnail;

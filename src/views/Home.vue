@@ -33,7 +33,7 @@ export default {
             try {
                 const result = await this.fetchBooks();
                 const jsonResult = await result.json();
-                console.log(jsonResult.items);
+                // console.log(jsonResult.items);
                 this.books = jsonResult.items;
             } catch (error) {
                 console.log(error);
