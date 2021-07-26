@@ -15,11 +15,6 @@
 import router from "../router/index";
 export default {
     name: "Book",
-    data() {
-        return {
-            imageURL: ""
-        };
-    },
     props: {
         book: {}
     },
