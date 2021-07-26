@@ -53,7 +53,6 @@ export default {
                 {
                     method: "GET"
                 });
-                resolved.status === 200 ? console.log("success") : console.log("fail");
                 return resolved;
         },
         async changePage(diff) {
