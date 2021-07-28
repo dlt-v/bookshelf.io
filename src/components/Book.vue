@@ -91,8 +91,6 @@ export default {
         .title {
             overflow: hidden;
         }
-        .author {
-        }
         .subtitle {
             margin-top: 10px;
         }

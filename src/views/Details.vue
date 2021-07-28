@@ -1,73 +1,83 @@
 <template>
-    <div class="book-container">
-        <img :src="getImage()" alt="" class="book-cover" />
+    <div v-if="!ready" class="placeholder">Loading...</div>
+    <div v-if="ready" class="book-container">
+        <img :src="setCover()" alt="" class="book-cover" />
         <div class="book-details">
-            <h1 class="book-title">{{ book ? book.volumeInfo.title : 'Loading...'}}</h1>
-            <h3 class="book-author">{{ `by ${book.volumeInfo.authors[0]}` }}</h3>
+            <h1 class="book-title">
+                {{ book ? book.volumeInfo.title : "Loading..." }}
+            </h1>
+            <h3 class="book-author">
+                {{
+                    book.volumeInfo.authors
+                        ? `by ${book.volumeInfo.authors[0]}`
+                        : ""
+                }}
+            </h3>
+            <div v-html="book.volumeInfo.description" class="book-description"></div>
         </div>
     </div>
 </template>
 
 <script>
-//TODO: Fetch data about the book.
-//TODO: Add styling
-//TODO: Add option to add to favourites
-//TODO?: Add option to add comments
+import router from "../router/index";
+
 export default {
     name: "Details",
     props: {
-        bookId: String,
+        bookId: String
     },
     data() {
         return {
-            book: {
-                isEmpty: false,
-                volumeInfo: {
-                    title: "Book Title"
-                }
-            },
-            ready: false,
+            ready: false
         };
     },
     methods: {
         async fetchBook() {
-            let bookData = {};
-
-            await fetch(
-                `https://www.googleapis.com/books/v1/volumes/${this.bookId}`,
-                {
-                    method: "GET",
+            try {
+                const response = await fetch(
+                    `https://www.googleapis.com/books/v1/volumes/${this.bookId}`,
+                    {
+                        method: "GET"
+                    }
+                );
+                if (!response.ok) {
+                    alert("Uh oh! Something went wrong!");
+                    router.push({ path: "/" });
                 }
-            )
-                .then((response) => response.json())
-                .then((book) => {
-                    bookData = book;
-                })
-                .catch((error) => console.log(error));
-
-            return bookData;
+                return await response.json();
+            } catch (error) {
+                console.log(error);
+            }
         },
-        getImage() {
-            // console.log(this.book.volumeInfo?.imageLinks.large);
-            if (!this.book.volumeInfo?.imageLinks) return "";
-            return this.book.volumeInfo?.imageLinks.thumbnail;
-        },
+        setCover() {
+            return this.book.volumeInfo.imageLinks.thumbnail;
+        }
     },
     async mounted() {
         this.book = await this.fetchBook();
-        console.log(this.book);
-    },
+        this.ready = true;
+    }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.placeholder {
+    font-size: 40px;
+    margin-top: 40px;
+    color: $vue-color;
+}
 .book-container {
-    border: 2px solid red; //debug
     width: 60%;
     min-width: 600px;
-    margin: 20px auto;
+    margin: 60px auto;
     display: flex;
     justify-content: center;
+    border-radius: 20px;
+    box-shadow: 3px 0 1px #ccc;
+    -webkit-box-shadow: 3px 0 5px #ccc;
+    -moz-box-shadow: 3px 0 5px #ccc;
+
     .book-cover {
         height: 400px;
         max-width: 50%;
@@ -78,10 +88,11 @@ export default {
         min-height: 400px;
         padding: 20px;
         color: $vue-color;
-        .book-title {
-            
-        }
         .book-author {
+            margin-top: 10px;
+        }
+        .book-description {
+            padding: 20px;
         }
     }
 }
