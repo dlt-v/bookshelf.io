@@ -13,18 +13,30 @@
                         : ""
                 }}
             </h3>
-            <div v-html="book.volumeInfo.description" class="book-description"></div>
+            <p>Is this book available in:</p>
+            <p>Epub: {{book.accessInfo.epub.isAvailable ? 'Yes' : 'No'}}</p>
+            <p>PDF: {{book.accessInfo.pdf.isAvailable ? 'Yes' : 'No'}}</p>
+            <p>Page count: {{book.volumeInfo.pageCount ? book.volumeInfo.pageCount : 'Not available'}}</p>
+            <p>Date: {{book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate : 'Not available'}}</p>
+            <p>Publisher: {{book.volumeInfo.publisher ? book.volumeInfo.publisher : 'Not available'}}</p>
         </div>
+    </div>
+    <div class="categories">
+        <Category category="text"/>
     </div>
 </template>
 
 <script>
 import router from "../router/index";
+import Category from "../components/Category";
 
 export default {
     name: "Details",
     props: {
         bookId: String
+    },
+    components: {
+        Category
     },
     data() {
         return {
@@ -56,6 +68,7 @@ export default {
     async mounted() {
         this.book = await this.fetchBook();
         this.ready = true;
+        console.log(this.book);
     }
 };
 </script>
@@ -70,9 +83,10 @@ export default {
 .book-container {
     width: 60%;
     min-width: 600px;
+    max-width: 800px;
     margin: 60px auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 20px;
     box-shadow: 3px 0 1px #ccc;
     -webkit-box-shadow: 3px 0 5px #ccc;
