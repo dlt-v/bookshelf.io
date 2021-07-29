@@ -21,8 +21,8 @@
             <p>Publisher: {{book.volumeInfo.publisher ? book.volumeInfo.publisher : 'Not available'}}</p>
         </div>
     </div>
-    <div class="categories">
-        <Category category="text"/>
+    <div v-if="ready" class="categories">
+        <Category :key="category" v-for="category in book.volumeInfo.categories" :category="category"/>
     </div>
 </template>
 
@@ -84,7 +84,7 @@ export default {
     width: 60%;
     min-width: 600px;
     max-width: 800px;
-    margin: 60px auto;
+    margin: 60px auto 0 auto;
     display: flex;
     justify-content: space-between;
     border-radius: 20px;
@@ -109,5 +109,11 @@ export default {
             padding: 20px;
         }
     }
+}
+.categories {
+    width: 60%;
+    min-width: 600px;
+    max-width: 800px;
+    margin: 10px auto;
 }
 </style>
